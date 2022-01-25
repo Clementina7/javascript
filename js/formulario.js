@@ -22,6 +22,7 @@ while (medida >= 0){
         console.log(medida + "cm Tu cama es King Size!")
         break; 
         }
+
     else {
         console.log(medida + "cm Perdon! Pero esa medida no trabajamos!")
         break;
