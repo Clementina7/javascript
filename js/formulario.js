@@ -1,34 +1,3 @@
-/*let medida = prompt("Ingrese el ancho de su colchon en cm (xej: 150)")
-while (medida >= 0){
-
-    if (medida >= 80 && medida <= 90){
-        alert(medida + "cm Tu cama es 1 1/2 plaza!");
-        console.log(medida + "cm Tu cama es 1 1/2 plaza!");
-        break;
-        }
-    if (medida == 100){
-        console.log(medida + "cm Tu cama es Twin Size!");  
-        break;   
-        }
-    if (medida >= 130 && medida <= 150){
-        console.log(medida + "cm Tu cama es 2 1/2 plazas!");
-        break;  
-        }
-    if (medida == 160){
-        console.log(medida + "cm Tu cama es Queen Size!");
-        break;
-        }
-    if (medida >= 180 && medida <= 200){
-        console.log(medida + "cm Tu cama es King Size!");
-        break; 
-        }
-
-    else {
-        console.log(medida + "cm Perdon! Pero esa medida no trabajamos!");
-        break;
-    }
-}*/
-
 const medida = ["1p","Twin","2 1/2p","Queen","King"]
 
 console.log(medida);
@@ -42,12 +11,41 @@ let seleccion = prompt(`Hola, indicanos la medida de tu cama:
                      4: Colchon de 160 x 200 cm,
                      5: Colchon de 180 a 200 x 200 cm`);
 
-if (seleccion="1"){
-    alert(alert(seleccion + " Tu cama es 1 1/2 plaza!");
+while (seleccion){
+
+  if (seleccion=="1"){
+        alert("Tu cama es 1 1/2 plaza!");
+        console.log("Tu cama es 1 1/2 plaza!");
+        break;
+        }
+    if (seleccion=="2"){
+        alert("Tu cama es Twin size!");
+        console.log("Tu cama es Twin size!");
+        break;    
+        }
+    if (seleccion=="3"){
+        alert("Tu cama es 2 1/2 plaza!");
+        console.log("Tu cama es 2 1/2 plaza!");
+        break;
+        }
+    if (seleccion=="4"){
+        alert("Tu cama es Queen size!");
+        console.log("Tu cama es Queen size!");
+        break;
+        }    
+    if (seleccion=="5"){
+        alert("Tu cama es King size!");
+        console.log("Tu cama es King size!");
+        break;
+        }
+    else {
+        alert("Opción invalida");
+        console.log("Opción invalida");
+        break;
+        }
 }
 
 
-/*
 class Productos {
     constructor(nombre, medida, composicion, precio, info){
         this.nombre = nombre
@@ -107,6 +105,7 @@ producto2 = new Productos ("frazada", "Queen", "microfibra - 100% poliester", "8
 producto3 = new Productos ("plumon sintetico", "2 1/2p", "microfibra - 100% poliester", "12800");
 producto4 = new Productos ("sabanas", "Twin", "50% algodon 50% poliester", "5800", "estampada");
 producto5 = new Productos ("sabanas", "1p", "Mixta 50% algodon 50% poliester", "3550", "lisa");
+
 
 sab1.comprar();
 sab1.pagar();
