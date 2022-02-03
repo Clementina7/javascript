@@ -123,14 +123,52 @@ producto2.comprar();
 producto2.pagar();
 console.log(producto2.mostrarInfo());
 
-producto3.comprar();
-producto3.pagar();
-console.log(producto3.mostrarInfo());
+function mayorQue(num) {
+    return (m) => (num) > m;
+}
 
-producto4.comprar();
-producto4.pagar();
-console.log(producto4.mostrarInfo());
+let mayorQ = mayorQue(8);
 
-producto5.comprar();
-producto5.pagar();
-console.log(producto5.mostrarInfo());
+console.log(mayorQ(4));
+
+
+function operacion(op) {
+    if (op == "sumar") {
+        return (a,b) => (a + b);
+    } 
+    else if (op == "restar") {
+        return (a,b) => (a-b);
+    }
+}
+
+let suma = operacion("sumar");
+let resta = operacion("restar");
+
+console.log(resta(40,55));
+console.log(suma(33,75));
+
+function recorre(arra, func) {
+    for(const pos of arra){
+        func(pos)
+    }
+}
+
+const numeros = [53, 76, 33, 1, 7];
+recorre(numeros, console.log);
+
+let total = "";
+
+function acumular(muchas) {   //ideal para usar con numeros
+    total += muchas
+}
+
+recorre(numeros, acumular);
+console.log(total);
+
+const duplicado = [];
+
+recorre(numeros, (pos) => {
+    duplicado.push(pos * 2);
+})
+
+console.log(duplicado);
