@@ -45,7 +45,7 @@ while (seleccion){
         }
 }
 
-
+/*
 class Productos {
     constructor(nombre, medida, composicion, precio, info){
         this.nombre = nombre
@@ -127,10 +127,8 @@ function mayorQue(num) {
     return (m) => (num) > m;
 }
 
-let mayorQ = mayorQue(8);
-
-console.log(mayorQ(4));
-
+let mayorQ = mayorQue(8)
+console.log(mayorQ);
 
 function operacion(op) {
     if (op == "sumar") {
@@ -172,3 +170,52 @@ recorre(numeros, (pos) => {
 })
 
 console.log(duplicado);
+
+let total = 0
+for (let i = 1; i <= 10; i++) {
+    total += i
+}
+console.log(total);
+
+console.log(sumarRango(1,10));*/
+
+const cursos = [
+    {nombre: 'Javascript', precio: 15000},
+    {nombre: 'ReactJS', precio: 22000},
+]
+
+const resultado = cursos.find((el) => el.nombre === "ReactJS")
+const resultado2 = cursos.find((el) => el.nombre === "DW")
+
+console.log(resultado) // {nombre: 'ReactJS', precio: 22000}
+console.log(resultado2) // undefined
+
+const Productos = [
+    {nombre: "cubrecama", medida: "king", composicion: "100% algodon", precio: 15000},
+    {nombre: "frazada", medida: "Queen", composicion: "microfibra - 100% poliester", precio: 8500},
+    {nombre: "plumon sintetico", medida: "2 1/2p", composicion: "microfibra - 100% poliester", precio: 12800},
+    {nombre: "sabanas", medida: "Twin", composicion: "50% algodon 50% poliester", precio: 5800, estilo: "estampada"},
+    {nombre: "sabanas", medida: "1p", composicion: "Mixta 50% algodon 50% poliester", precio: 3550, estilo: "lisa"},
+]
+
+const busqueda = Productos.find((el) => el.nombre == "frazada");
+const busqueda1 = Productos.find((el) => el.medida == "Twin");
+
+console.log(busqueda);
+console.log(busqueda1);
+
+const busqueda2 = Productos.filter((el) => el.nombre == "sabanas");
+const busqueda3 = Productos.filter((el) => el.medida == "Twin");
+
+console.log(busqueda2);
+console.log(busqueda3);
+
+const actualizado = Productos.map((el) => {
+    return {
+        nombre: el.nombre,
+        precio: el.precio * 1.25
+    }
+})
+
+document.write(actualizado);
+console.log(actualizado);
