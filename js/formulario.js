@@ -219,3 +219,4 @@ const actualizado = Productos.map((el) => {
 
 document.write(actualizado);
 console.log(actualizado);
+
