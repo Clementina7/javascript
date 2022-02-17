@@ -18,29 +18,3 @@ let stockProductos = [
     {id: 17, nombre: "Sabanas", medida: "Queen" , composicion: "50% algodón 50% poliester", estilo: "lisas", precio: "4500", img: ""},
 ]
 
-
-/*Vimos algunas formas mejores en la clase, como por ejemplo, usar las propiedades innerHTML e 
-innerText, utilizar los metodos createElement() y appendChild() y especialmente, aprovechar los 
-template strings. Por ejemplo, podes probar lo siguiente:
-
-	for (let el of actualizado) {
-   		document.write(el.nombre + " ");
-   		document.write("$" + el.precio);
-   		document.write('<br>');
-	}
-
-o lo siguiente
-
-	for (let prod of Productos) {
-   		let div = document.createElement("div");
-   		div.innerHTML = `
-        	<h3>${prod.nombre}</h3>
-        	<b>Tamanio: ${prod.medida}</b><br/>
-        	<i>${prod.composicion}</i>
-        	<h4>$${prod.precio}</h4> `;
-
-   		document.body.appendChild(div);
-    }
-
-Asi, podemos mostrar informacion del script en el html. Con un poco de estilos de css, queda a 
-tono con el resto del diseño.*/
