@@ -1,4 +1,4 @@
-const medida = ["1p","Twin","2 1/2p","Queen","King"]
+/*const medida = ["1p","Twin","2 1/2p","Queen","King"]
 
 console.log(medida);
 console.log(medida.includes("King"));
@@ -44,7 +44,7 @@ while (seleccion){
         break;
         }
 }
-
+*/
 /*
 class Productos {
     constructor(nombre, medida, composicion, precio, info){
@@ -220,3 +220,12 @@ const actualizado = Productos.map((el) => {
 document.write(actualizado);
 console.log(actualizado);
 
+prueba = document.getElementsByClassName("prueba");
+document.write(prueba)
+
+camposs = document.getElementsByClassName("camposs");
+camposs.placeholder("hhjkk");
+camposs.setAttribute("klñ{{")
+
+prueba = document.getElementsByClassName("prueba");
+prueba.style.paddingTop= "100px";
