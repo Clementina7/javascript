@@ -69,13 +69,39 @@ for (let el of actualizado) {
 }
 
 
+
 for (let prod of Productos) {
     let div = document.createElement("div");
-    div.innerHTML = `
+    div.innerHTML =
+    `
+     <img width=200 src="../../cover.jpg">
      <h4><b>${prod.nombre}</b></h4>
      Medida: ${prod.medida}<br/>
      <i>${prod.composicion}</i>
      <h6><b>$${prod.precio}</b></h6> `;
 
     document.body.appendChild(div);
+    
 }
+
+/*
+const contenedor = document.querySelector(".contenedor");
+
+function crearProductos(nombre, medida, composicion, precio){
+`
+img = <img src="../imagenes/logo.png">;
+nombre = <h4>${prod.nombre}</h4>;
+medida = ${prod.medida}</br>;
+composicion = <i>${prod.composicion}</i>;
+precio = <h6><b>$${prod.precio}</b></h6>;`
+return [img,nombre, medida, composicion, precio];
+}
+
+for (var i = 0; i < 20; i++) {
+    let medidaRandom = Math.random()*10;
+    let precioRandon = Math.random()*100+900;
+    let articulo = crearArticulo(`articulo ${i}`,`medida ${medidaRandom}`,
+    `precio`precioRandom);
+    contenedor.innerHTML += articulo;
+}
+*/
