@@ -74,7 +74,7 @@ for (let prod of Productos) {
     let div = document.createElement("div");
     div.innerHTML =
     `
-     <img width=200 src="../../cover.jpg">
+     <img width=200 src="../imagenes/cover.jpg">
      <h4><b>${prod.nombre}</b></h4>
      Medida: ${prod.medida}<br/>
      <i>${prod.composicion}</i>
