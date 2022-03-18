@@ -1,107 +1,151 @@
-/*
+// app.js //
 
 
-*/
-/*
-class Productos {
-    constructor(nombre, medida, composicion, precio, info){
-        this.nombre = nombre
-        this.medida = medida
-        this.composicion = composicion
-        this.precio = precio
-        this.info = info
-    }
+let carritoDeCompras = []
 
-    mostrarInfo(){
-        return (`
-        Nombre: ${this.nombre}; 
-        Medida: ${this.medida};
-        Composicion: ${this.composicion};
-        Precio: ${this.precio};    
-            `)
-    }
-}
+const articulos = document.getElementById('articulos'); 
+const contenedorCarrito = document.getElementById('carrito-contenedor');
 
-class Sabanas extends Productos{
-    constructor(nombre, medida, composicion, precio, estilo){
-        super(nombre, medida, composicion, precio,);
-        this.estilo = estilo;
-    }
+const contadorCarrito = document.getElementById('contadorCarrito');
+const precioTotal = document.getElementById('precioTotal');
 
-    informacion(){
-      return (this.mostrarInfo() + `Estilo: ${this.estilo}`);
-    }
-}
+const selectMedidas= document.getElementById('selectMedidas');
+const buscador = document.getElementById('search');
 
-sab1 = new Sabanas ("sabanas", "Twin", "50% algodon 50% poliester", "5800", "estampada");
-sab2 = new Sabanas ("sabanas", "2 1/2p", "100% algodon", "7800", "lisa");
 
-producto1 = new Productos ("cubrecama", "king", "100% algodon", "15000");
-producto2 = new Productos ("frazada", "Queen", "microfibra - 100% poliester", "8500");
-producto3 = new Productos ("plumon sintetico", "2 1/2p", "microfibra - 100% poliester", "12800");
-producto4 = new Productos ("sabanas", "Twin", "50% algodon 50% poliester", "5800", "estampada");
-producto5 = new Productos ("sabanas", "1p", "Mixta 50% algodon 50% poliester", "3550", "lisa");
 
-*/
-
-const Productos = [
-    {nombre: "cubrecama", medida: "king", composicion: "100% algodon", precio: 15000},
-    {nombre: "frazada", medida: "Queen", composicion: "microfibra - 100% poliester", precio: 8500},
-    {nombre: "plumon sintetico", medida: "2 1/2p", composicion: "microfibra - 100% poliester", precio: 12800},
-    {nombre: "sabanas", medida: "Twin", composicion: "50% algodon 50% poliester", precio: 5800, estilo: "estampada"},
-    {nombre: "sabanas", medida: "1p", composicion: "Mixta 50% algodon 50% poliester", precio: 3550, estilo: "lisa"},
-]
-
-const actualizado = Productos.map((el) => {
-    return {
-        nombre: el.nombre,
-        precio: el.precio * 1.25
+//filtro//
+selectMedidas.addEventListener('change', ()=>{
+    console.log(selectMedidas.value);
+    if(selectMedidas.value == 'all'){
+        mostrarProductos(stockProductos);
+    }else{
+        mostrarProductos(stockProductos.filter(el => el.medida == selectMedidas.value));
+        console.log(stockProductos.filter(el => el.medida == selectMedidas.value));
     }
 })
 
-document.write(actualizado);
-console.log(actualizado);
+//Buscador
+buscador.addEventListener('input', ()=>{
+    if (buscador.value == "") {
+        mostrarProductos(stockProductos)
+    }else{
+        mostrarProductos(stockProductos.filter(el => el.nombre.toLowerCase().includes(buscador.value.toLowerCase())))
+    }
+})
 
-for (let el of actualizado) {
-    document.write(el.nombre + " ");
-    document.write("$" + el.precio);
-    document.write('<br>');
-}
 
+//logica Ecommerce
 
+mostrarProductos(stockProductos)
 
-for (let prod of Productos) {
-    let div = document.createElement("div");
-    div.innerHTML =
-    `
-     <img width=200 src="../imagenes/cover.jpg">
-     <h4><b>${prod.nombre}</b></h4>
-     Medida: ${prod.medida}<br/>
-     <i>${prod.composicion}</i>
-     <h6><b>$${prod.precio}</b></h6> `;
+function mostrarProductos(array){
+   articulos.innerHTML =''; //contenedorProductos//
+    for (const producto of array) {
+        let div = document.createElement('div');
+        div.className = 'producto';
+        div.innerHTML += 
+        `<div class="card">
+           <div class="card-image">
+            <img id="imagen" src=${producto.img}>
+            <span class="card-title">${producto.nombre}</span>
+            <a id="botonAgregar${producto.id}" class="btn-floating halfway-fab waves-effect waves-light pink"><i class="material-icons">add_shopping_cart></i></a>
+           </div>
+           <div class="card-content">
+           <p>${producto.composicion}</p>
+           <p>Medida: ${producto.medida}</p>
+           <p> $${producto.precio}</p>
+           </div>
+        </div> `
+                        
+        articulos.appendChild(div);
+        
+        
+        let btnAgregar = document.getElementById(`botonAgregar${producto.id}`)
+        // console.log(btnAgregar)
+    
+        btnAgregar.addEventListener('click',()=>{
 
-    document.body.appendChild(div);
+            agregarAlCarrito(producto.id)
+        })
+    }
     
 }
 
-/*
-const contenedor = document.querySelector(".contenedor");
 
-function crearProductos(nombre, medida, composicion, precio){
-`
-img = <img src="../imagenes/logo.png">;
-nombre = <h4>${prod.nombre}</h4>;
-medida = ${prod.medida}</br>;
-composicion = <i>${prod.composicion}</i>;
-precio = <h6><b>$${prod.precio}</b></h6>;`
-return [img,nombre, medida, composicion, precio];
+function agregarAlCarrito(id) {
+    let repetido = carritoDeCompras.find(item => item.id == id)
+    if(repetido){
+        console.log(repetido)
+        repetido.cantidad = repetido.cantidad + 1
+        document.getElementById(`cantidad${repetido.id}`).innerHTML = `<p id= cantidad${repetido.id}>Cantidad:${repetido.cantidad}</p>`
+        actualizarCarrito()
+    } 
+    else{
+        let productoAgregar = stockProductos.find(elemento => elemento.id == id)
+        // console.log(productoAgregar)
+        carritoDeCompras.push(productoAgregar)
+        actualizarCarrito()
+        let div = document.createElement('div')
+        div.className = 'productoEnCarrito'
+        div.innerHTML =`
+            <p>${productoAgregar.nombre}</p>
+            <p>Precio: $${productoAgregar.precio}</p>
+            <p id= cantidad${productoAgregar.id}>Cantidad:${productoAgregar.cantidad}</p>
+            <button id= botonEliminar${productoAgregar.id} class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
+        `
+        contenedorCarrito.appendChild(div)
+    
+        let btnEliminar = document.getElementById(`botonEliminar${productoAgregar.id}`)
+        btnEliminar.addEventListener('click',()=>{
+            console.log(productoAgregar.id);
+            btnEliminar.parentElement.remove()                         
+            carritoDeCompras = carritoDeCompras.filter(elemento => elemento.id != productoAgregar.id)
+            actualizarCarrito()
+            localStorage.setItem('carrito', JSON.stringify(carritoDeCompras))
+        })
+    }
+
+    localStorage.setItem('carrito', JSON.stringify(carritoDeCompras))
+}   
+
+
+function  actualizarCarrito (){
+    contadorCarrito.innerText = carritoDeCompras.reduce((acc,el)=> acc + el.cantidad, 0)
+    precioTotal.innerText = carritoDeCompras.reduce((acc,el)=> acc + (el.precio * el.cantidad), 0)
 }
 
-for (var i = 0; i < 20; i++) {
-    let medidaRandom = Math.random()*10;
-    let precioRandon = Math.random()*100+900;
-    let articulo = crearArticulo(`articulo ${i}`,`medida ${medidaRandom}`,
-    `precio`precioRandom);
-    contenedor.innerHTML += articulo;
+
+function recuperar() {
+    let recuperarLS = JSON.parse(localStorage.getItem('carrito'))
+    console.log(recuperarLS);
+    if(recuperarLS){
+        recuperarLS.forEach(element => {
+            agregarAlCarrito(element.id)
+        });
+    }
 }
-*/
+
+recuperar();
+
+
+// modal.js //
+
+const carritoAbrir = document.getElementById('boton-carrito');
+const carritoCerrar = document.getElementById('carritoCerrar');
+
+const contenedorModal = document.getElementsByClassName('modal-contenedor')[0]
+const modalCarrito = document.getElementsByClassName('modal-carrito')[0]
+
+carritoAbrir.addEventListener('click', ()=> {
+    contenedorModal.classList.toggle('modal-active')
+})
+carritoCerrar.addEventListener('click', ()=> {
+    contenedorModal.classList.toggle('modal-active')
+})
+modalCarrito.addEventListener('click',(e)=>{
+    e.stopPropagation()
+})
+contenedorModal.addEventListener('click', ()=>{
+    carritoCerrar.click()
+})
